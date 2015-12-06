@@ -1,7 +1,8 @@
 (ns crowd-scribe.core
+  (:require [com.stuartsierra.component :as component]
+            [crowd-scribe.systems :refer [prod-system]])
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (alter-var-root #'prod-system component/start))

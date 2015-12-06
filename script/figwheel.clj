@@ -1,6 +1,8 @@
 (require '[figwheel-sidecar.repl-api :as ra]
          '[com.stuartsierra.component :as component])
 
+;; TODO: Move this into a component in user.cljs
+
 (def figwheel-config
   {:figwheel-options {}
    :build-ids ["dev"]
@@ -23,20 +25,20 @@
     (ra/stop-figwheel!)
     config))
 
-(def system
+(def ui-system
   (atom
    (component/system-map
     :figwheel (map->Figwheel figwheel-config))))
 
-(defn start []
-  (swap! system component/start))
+(defn start-ui []
+  (swap! ui-system component/start))
 
-(defn stop []
-  (swap! system component/stop))
+(defn stop-ui []
+  (swap! ui-system component/stop))
 
-(defn reload []
-  (stop)
-  (start))
+(defn reload-ui []
+  (stop-ui)
+  (start-ui))
 
-(defn repl []
+(defn repl-ui []
   (ra/cljs-repl))
